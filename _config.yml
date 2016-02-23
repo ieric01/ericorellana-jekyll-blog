@@ -1,7 +1,7 @@
 # Site settings
-title: Your awesome title
+title: Code is my Craft
 email: your-email@domain.com
-description: > # this means to ignore newlines until "baseurl:"
+description: I code everyday on a red, IKEA standing desk, which my brother and I put together after reading the <a target="_blank" href="http://www.huffingtonpost.com/2015/04/09/ikea-standing-desk-hack_n_7033432.html"> Ultimate $22 Standing Desk IKEA Hack. </a> I like to challenge myself everyday by learning new technologies like Jekyll, which I used to build this site you are reading! </br> <strong> - Eric Orellana </strong>
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://yourdomain.com" # the base hostname & protocol for your site
 paginate: 5
