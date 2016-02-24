@@ -1,9 +1,9 @@
 # Site settings
 title: Code is my Craft
-email: your-email@domain.com
+email: eric.orellana92@gmail.com
 description: I code everyday on a red, IKEA standing desk, which my brother and I put together after reading the <a target="_blank" href="http://www.huffingtonpost.com/2015/04/09/ikea-standing-desk-hack_n_7033432.html"> Ultimate $22 Standing Desk IKEA Hack. </a> I like to challenge myself everyday by learning new technologies like Jekyll, which I used to build this site you are reading! </br> <strong> - Eric Orellana </strong>
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+url: "http://www.ericorellana.net" # the base hostname & protocol for your site
 paginate: 5
 paginate_path: "/page/:num"
 
