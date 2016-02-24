@@ -10,3 +10,8 @@ permalink: /projects/
 - [BucketListr](https://github.com/ieric01/BucketList): A rails application that helps people with similar bucket list items(events/things they want to do) to connect and find deals. See it on [heroku](https://bucketlist-flatiron.herokuapp.com/){:target="_blank"}
 
 Vist my [github](https://github.com/ieric01) to see my other projects!
+
+## What's New
+
+Check out my <a href="/codeplayer">codeplayer</a>, which is a live code-editor, that processes HTML, CSS, and Javascript.
+
