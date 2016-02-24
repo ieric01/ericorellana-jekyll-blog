@@ -15,7 +15,7 @@
       font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         font-weight: 300;
         /*applied min-width, so when resizing layout doesn't break*/
-        min-width: 1500px;
+        min-width: 800px;
     }
 
     #codeplayer-topnav{
@@ -29,7 +29,8 @@
       float: left;
       margin-left: 25px;
       font-weight: bold;
-      color: #0099CC;
+      /*color: #0099CC;*/
+      color: black;
       font-size: 130%;
       padding: 5px;
     }
@@ -41,6 +42,7 @@
       display: table;
       padding: 0px;
       margin: 0 auto;
+      cursor: pointer;
     }
 
     #programming-languages-tabs li {
@@ -57,6 +59,7 @@
     }
 
     #run-button {
+      cursor: pointer;
       font-size: 120%;
     }
 
@@ -86,10 +89,32 @@
     }
 
     .panelHeader{
-      height: 20px;
+      /*height: auto;*/
+      overflow: auto;
       text-align: center;
       background-color: grey;
     }
+
+    .panelHeader > h3 {
+      padding: 10px;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      color: white;
+    }
+
+   /* .sample-container {
+      text-align: center;
+      cursor: pointer;
+      border-right: 1px solid black;
+      border-top: 1px solid black;
+    }
+
+    .sample-container > h3 {
+      margin-bottom: 0px;
+      margin-top: 0px;
+      padding: 5px;
+    }*/
+
 </style>
 
 <div id="wrapper">
@@ -98,10 +123,10 @@
       CodePlayer V1.0
     </div>
     <div id="run-bttn-div">
-        <button id="run-button" style="background-color: blue;">Run</button>
+        <button id="run-button" style="background-color: white;">Run</button>
       </div>
       <ul id="programming-languages-tabs" >
-        <li id="html-toggle">HTML</li>
+        <li>HTML</li>
         <li>CSS</li>
         <li>JS</li>
         <li>Result</li>
@@ -110,25 +135,42 @@
   <div class="clear"></div>
   <div id="panels-container">
     <div id="html-panel">
-      <div class="panelHeader">HTML PANEL</div>
-      <textarea style="border-left:none;">
-        Some Code
+      <div class="panelHeader">
+        <h3>HTML</h3>
+      </div>
+     <!--  <div class="sample-container">
+        <h3 class="sample-code-btn">HTML Sample Code</h3>
+      </div> -->
+      <textarea placeholder="dfdf"style="border-left:none;">
+        <h1>Sample Code</h1>
       </textarea>
     </div>
     <div id="css-panel">
-      <div class="panelHeader">CSS Panel</div>
+      <div class="panelHeader">
+        <h3>CSS</h3>
+      </div>
+     <!--  <div class="sample-container">
+        <h3 class="sample-code-btn">CSS Sample Code</h3>
+      </div> -->
       <textarea>
-        Some code
+        h1 {
+          color: red;
+        }
       </textarea>
     </div>
     <div id="js-panel">
-      <div class="panelHeader">JS PANEL</div>
+      <div class="panelHeader">
+        <h3>JS</h3>
+      </div>
+      <!-- <div class="sample-container">
+        <h3 class="sample-code-btn">JS Sample Code</h3>
+      </div> -->
       <textarea>
-        Some Code
+        alert("sample code");
       </textarea>
     </div>
     <div id="result-panel">
-      <div class="panelHeader">RESULTS PANEL</div>
+      <div class="panelHeader"><h3>RESULTS</h3></div>
       <iframe id="resultsdiv" style="border-right: none;">
       </iframe>
     </div>
@@ -144,8 +186,8 @@
 
   function numOfPanelsDisplayed(){
     var numOfPanelsDisplayed = 1,
-      togglesArray = [];
-    $("li").each(function(){
+        togglesArray = [];
+    $("#programming-languages-tabs > li").each(function(){
       var selectedPanel = $("#" + $(this).text().toLowerCase() + "-panel")
       if (selectedPanel.css("display") != "none"){
         numOfPanelsDisplayed++;
@@ -162,7 +204,7 @@
     }
   }
 
-  $("li").each(function(){
+  $("#programming-languages-tabs > li").each(function(){
     $(this).click(function(){
       var selectedPanel = $("#" + $(this).text().toLowerCase() + "-panel"),
         results = numOfPanelsDisplayed(),
@@ -171,7 +213,7 @@
         width = 100/ panelsDisplayed;
       if (selectedPanel.css("display") == "none"){
         selectedPanel.css("width", width + "%");
-        if (togglesDisplayedArray.length != 0){
+        if (togglesDisplayedArray.length > 0){
           setWidth(togglesDisplayedArray, width);
         }
         $(this).css("background-color", "#0099CC");
@@ -184,6 +226,7 @@
       }
     });
   });
+
 
   $("#run-button").click(function(){
     $("#resultsdiv").contents().find('head').prepend($("<style type='text/css'>" +  $('#css-panel textarea').val() + "</style>"));
