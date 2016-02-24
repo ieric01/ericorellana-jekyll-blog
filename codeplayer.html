@@ -1,42 +1,196 @@
+<style type="text/css">
+  .cf:before,
+    .cf:after {
+        content: " ";
+        display: table;
+    }
+
+    .cf:after {
+        clear: both;
+    }
+
+    body {
+      margin: 0px;
+      padding: 0px;
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight: 300;
+        /*applied min-width, so when resizing layout doesn't break*/
+        min-width: 1500px;
+    }
+
+    #codeplayer-topnav{
+      border-bottom: 1px solid grey;
+      background-color: #e0e0e0;
+      width:100%;
+      height: 40px;
+    }
+
+    #logo {
+      float: left;
+      margin-left: 25px;
+      font-weight: bold;
+      color: #0099CC;
+      font-size: 130%;
+      padding: 5px;
+    }
+
+
+    #programming-languages-tabs {
+      position: relative;
+      top: 5px;
+      display: table;
+      padding: 0px;
+      margin: 0 auto;
+    }
+
+    #programming-languages-tabs li {
+      display: table-cell;
+      float: left;
+      border: 1px solid grey;
+      padding: 5px 7px;
+      border-radius: 2px;
+    }
+
+    #run-bttn-div{
+      padding: 5px 10px 0 0;
+      float: right;
+    }
+
+    #run-button {
+      font-size: 120%;
+    }
+
+    #resultsdiv,
+    #panels-container textarea{
+      /*what exactly is border-box, because this fixed my text-area to not flow passed the right border line*/
+      box-sizing: border-box;
+      border: 1px solid black;
+      border-bottom: none;
+      width: 100%;
+      height: 100%;
+      font-family: 'Tahoma', 'sans-serif';
+      font-size: 1.2em;
+      /*Removes bottom right resizable feature of text area*/
+      resize: none;
+    }
+
+
+    #html-panel, #result-panel, #css-panel, #js-panel{
+      float: left;
+      display: none;
+      height: 100%;
+    }
+
+    .clear {
+      clear: both;
+    }
+
+    .panelHeader{
+      height: 20px;
+      text-align: center;
+      background-color: grey;
+    }
+</style>
+
 <div id="wrapper">
-    <div id="codeplayer-topnav" class="cf">
-      <div id="logo">
-        CodePlayer V1.0
+  <div id="codeplayer-topnav" class="cf">
+    <div id="logo">
+      CodePlayer V1.0
+    </div>
+    <div id="run-bttn-div">
+        <button id="run-button" style="background-color: blue;">Run</button>
       </div>
-      <div id="run-bttn-div">
-          <button id="run-button" style="background-color: blue;">Run</button>
-        </div>
-        <ul id="programming-languages-tabs" >
-          <li id="html-toggle">HTML</li>
-          <li>CSS</li>
-          <li>JS</li>
-          <li>Result</li>
-        </ul>
-    </div><!--end of codeplayer-topnav -->
-    <div class="clear"></div>
-    <div id="panels-container">
-      <div id="html-panel">
-        <div class="panelHeader">HTML PANEL</div>
-        <textarea style="border-left:none;">
-          Some Code
-        </textarea>
-      </div>
-      <div id="css-panel">
-        <div class="panelHeader">CSS Panel</div>
-        <textarea>
-          Some code
-        </textarea>
-      </div>
-      <div id="js-panel">
-        <div class="panelHeader">JS PANEL</div>
-        <textarea>
-          Some Code
-        </textarea>
-      </div>
-      <div id="result-panel">
-        <div class="panelHeader">RESULTS PANEL</div>
-        <iframe id="resultsdiv" style="border-right: none;">
-        </iframe>
-      </div>
-    </div><!-- end of panels-container -->
-  </div><!--end of wrapper -->
+      <ul id="programming-languages-tabs" >
+        <li id="html-toggle">HTML</li>
+        <li>CSS</li>
+        <li>JS</li>
+        <li>Result</li>
+      </ul>
+  </div><!--end of codeplayer-topnav -->
+  <div class="clear"></div>
+  <div id="panels-container">
+    <div id="html-panel">
+      <div class="panelHeader">HTML PANEL</div>
+      <textarea style="border-left:none;">
+        Some Code
+      </textarea>
+    </div>
+    <div id="css-panel">
+      <div class="panelHeader">CSS Panel</div>
+      <textarea>
+        Some code
+      </textarea>
+    </div>
+    <div id="js-panel">
+      <div class="panelHeader">JS PANEL</div>
+      <textarea>
+        Some Code
+      </textarea>
+    </div>
+    <div id="result-panel">
+      <div class="panelHeader">RESULTS PANEL</div>
+      <iframe id="resultsdiv" style="border-right: none;">
+      </iframe>
+    </div>
+  </div><!-- end of panels-container -->
+</div><!--end of wrapper -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+  var windowHeight = $(window).height();
+  var topNavHeight = $("#codeplayer-topnav").height();
+  var panelsContainerHeight = windowHeight - topNavHeight;
+  $("#panels-container").height(panelsContainerHeight+"px")
+
+  function numOfPanelsDisplayed(){
+    var numOfPanelsDisplayed = 1,
+      togglesArray = [];
+    $("li").each(function(){
+      var selectedPanel = $("#" + $(this).text().toLowerCase() + "-panel")
+      if (selectedPanel.css("display") != "none"){
+        numOfPanelsDisplayed++;
+        togglesArray.push(selectedPanel);
+      }
+    });
+    return [numOfPanelsDisplayed, togglesArray];
+  }
+
+
+  function setWidth(togglesDisplayedArray, width){
+    for(var i = 0; i < togglesDisplayedArray.length; i++){
+      togglesDisplayedArray[i].css("width", width + "%");
+    }
+  }
+
+  $("li").each(function(){
+    $(this).click(function(){
+      var selectedPanel = $("#" + $(this).text().toLowerCase() + "-panel"),
+        results = numOfPanelsDisplayed(),
+        panelsDisplayed = results[0],
+        togglesDisplayedArray = results[1],
+        width = 100/ panelsDisplayed;
+      if (selectedPanel.css("display") == "none"){
+        selectedPanel.css("width", width + "%");
+        if (togglesDisplayedArray.length != 0){
+          setWidth(togglesDisplayedArray, width);
+        }
+        $(this).css("background-color", "#0099CC");
+        selectedPanel.show();
+      }else{
+        width = 100/(panelsDisplayed - 2);
+        setWidth(togglesDisplayedArray, width);
+        selectedPanel.hide();
+        $(this).css("background-color","#e0e0e0");
+      }
+    });
+  });
+
+  $("#run-button").click(function(){
+    $("#resultsdiv").contents().find('head').prepend($("<style type='text/css'>" +  $('#css-panel textarea').val() + "</style>"));
+    $("#resultsdiv").contents().find('body').prepend($("#html-panel textarea").val());
+    var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.text = $("#js-panel textarea").val();
+      jQuery("#resultsdiv").append(script);
+  });
+</script>
