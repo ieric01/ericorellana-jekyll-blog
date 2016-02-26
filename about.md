@@ -11,3 +11,11 @@ I had this inner feeling that kept me up at night. I felt like I was not on the 
 
 ### What do I love about coding?
 I love how coding is a mirror expression of my own thoughts. I love how I get to play detective when I have a bug in my program. I love the character traits that it has helped me develop like patience, humility, and courage. I love how there's always something to new learn, whether it is from my colleague, or an article I encounter. I love the mind-bending training I go through while coding, and how it satisfies my passion for learning and solving challenging problems. I love the collaborative process of coding, and reading everyone's unique solution to a problem. As a whole, we grow exponentially, because each of us has new information that we can share and add to our mental models. I love how coding unites us.
+
+### Credits
+
+This site was built using the following:
+
+- [Jekyll](http://jekyllrb.com/)
+- [Hosted on Github Pages](https://pages.github.com/)
+- [Personally-Developed-Theme](https://github.com/jonathanpike/personally-developed)

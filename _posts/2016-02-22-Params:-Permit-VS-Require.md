@@ -4,7 +4,7 @@ title:  "Params: Permit vs. Require...What's the difference?"
 date:   2016-01-20 09:28:53
 ---
 
-Mass sql injection, is an insertion of a sql query via the input data from the client to the application. In order to protect our application from attacks like this, we use strong params. When setting up our strong params we use params, which is an instance of ActionController::Parameters, and can call the methods require and permit.
+Mass sql injection, is an insertion of a sql query via an input field. In order to protect our application from these attacks, we use params. Params, is an instance of ActionController::Parameters, and has the methods require and permit.
 
 ### So what exactly does require and permit do ?
 
@@ -31,7 +31,7 @@ As you see above, if we use permit and pass in an attribute that is missing, the
 
 On the other hand,
 
-The require method ensures that a specific parameter is present and if its not provided, the require method throws an error. Also, require does not return the actual hash but instead the actual value. For example, using the same example above:
+The require method ensures that a specific parameter is present, if not, the require method raises an error. The require method does not return a hash but the value of the specified hash key. For example, using the same example above:
 
 {% highlight ruby %}
 params = ActionController::Parameters.new(name: "eric", hobby: "juggling")
@@ -58,7 +58,7 @@ params = ActionController::Parameters.new( "book"=>
  "author_attributes"=>{"author_name"=>"James Godwin"}})
 {% endhighlight %}
 
-An important key to remember is that the permit method only allows scalar values such as strings, numbers, date, or time, but not hashes or arrays
+It's important to remember that the permit method only allows scalar values such as strings, numbers, date, or time, but not hashes or arrays
 
 {% highlight ruby %}
 # permit method only accepts scalar values
